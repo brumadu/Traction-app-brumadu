@@ -17,7 +17,7 @@ interface specificationsData {
   rpm: number;
 }
 
-export interface MyData {
+export interface allData {
     id: number;
     name: string;
     assignedUserIds: [string];
@@ -35,14 +35,8 @@ export interface MyData {
 
 const API_BASE_URL = 'https://my-json-server.typicode.com/tractian/fake-api';
 
-export function fetchAssets(): Promise<MyData[]> {
+export function fetchAssets(): Promise<allData[]> {
   return axios
-    .get<MyData[]>(`${API_BASE_URL}/assets`)
-    .then((response) => response.data);
-}
-
-export function createMyData(data: MyData): Promise<MyData> {
-  return axios
-    .post<MyData>(`${API_BASE_URL}/my-data`, data)
-    .then((response) => response.data);
+    .get<allData[]>(`${API_BASE_URL}/assets`)
+    .then((response) => response.data)
 }

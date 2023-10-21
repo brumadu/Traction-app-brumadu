@@ -1,85 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { Layout, Row, Col, Card, Menu, MenuProps, Typography, Space, Button } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { CaretRightOutlined } from '@ant-design/icons';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import { fetchAssets, MyData } from '../api/api';
-import { Collapse, theme } from 'antd';
-import { MyMenu } from './Menu';
-import { CollapseItem } from './CollapseItem';
+import { useState } from 'react';
+import { Layout, Row, Typography, Radio, } from 'antd';
+import { AssetsPage } from './pages/assetsPage';
 
-const { Title, Text } = Typography;
-const { Panel } = Collapse;
+const { Text } = Typography;
 const { Header, Content } = Layout;
 
-const items: MenuProps['items'] = [
-  {
-    label: 'Motor',
-    key: 'motor',
-    icon: <SettingOutlined />,
-  },
-  {
-    label: 'Fan',
-    key: 'fan',
-    icon: <AppstoreOutlined />,
-  },
-];
-
 function Dashboard() {
-  const [currentKey, setCurrentKey] = useState('motor');
-  const onClick: MenuProps['onClick'] = (e) => {
-      setCurrentKey(e.key);
-    };
-
-  const [myData, setMyData] = useState<MyData[]>([]);
-  useEffect(() => {
-    fetchAssets().then((data) => {
-      if (data) {
-        setMyData(data);
-      } else {
-        console.error("Error fetching data");
-      }
-    }).catch((error) => console.error(error));
-  }, [])
-
-  const options = {
-    title: {
-      text: 'Health History',
-    },
-    yAxis: [
-      {
-        text: 'TimeStamp',
-        data: [],
-      }
-    ]
-  };
-
-
-
-
+  const [page, setPage] = useState('assets');
   return (
-    <Layout>
-      <Header>
-      </Header>
-      <Content>
-            <Title>Ativos</Title>
-        <Row justify='space-around'>
-            <MyMenu data={'fan'} items={items} onClick={onClick}/>
+    <Content>
+      <Header style={{backgroundColor: '#392282'}}/>
+        <Row>
+          <Radio.Group size="middle" onChange={(e) => setPage(e.target.value)}>
+            <Radio.Button value={"assets"}>Ativos</Radio.Button>
+            <Radio.Button value={"intern"}>Interno</Radio.Button>
+            <Radio.Button value={"serviceOrder"}>Ordens de Serviço</Radio.Button>
+          </Radio.Group>
         </Row>
-        <Row gutter={16} justify="center">
-        {
-          myData.map((item) => (
-            item.model == currentKey ?
-            <Col span={12}>
-              <CollapseItem data={item} />
-            </Col>
-            : <></>
-            ))
-          }
-      </Row>
+        { page === "assets" ?
+          <AssetsPage/>
+          : 
+          page === "intern" ?
+          <>
+          <Text>Intern</Text>
+          </> :
+          <><Text>else</Text></>}
       </Content>
-    </Layout>
   );
 };
 
