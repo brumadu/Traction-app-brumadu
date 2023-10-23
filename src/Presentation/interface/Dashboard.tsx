@@ -1,31 +1,50 @@
 import { useState } from 'react';
-import { Layout, Row, Typography, Radio, } from 'antd';
+
+import { Layout, Typography, Space, Row, Button, Anchor } from 'antd';
+
 import { AssetsPage } from './pages/assetsPage';
 
 const { Text } = Typography;
-const { Header, Content } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 function Dashboard() {
   const [page, setPage] = useState('assets');
   return (
-    <Content>
-      <Header style={{backgroundColor: '#392282'}}/>
-        <Row>
-          <Radio.Group size="middle" onChange={(e) => setPage(e.target.value)}>
-            <Radio.Button value={"assets"}>Ativos</Radio.Button>
-            <Radio.Button value={"intern"}>Interno</Radio.Button>
-            <Radio.Button value={"serviceOrder"}>Ordens de Serviço</Radio.Button>
-          </Radio.Group>
-        </Row>
-        { page === "assets" ?
-          <AssetsPage/>
-          : 
-          page === "intern" ?
-          <>
-          <Text>Intern</Text>
-          </> :
-          <><Text>else</Text></>}
-      </Content>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Header style={{ backgroundColor: '#abcabc' }} />
+      <Layout>
+        <Sider theme='light' />
+        <Sider theme='light' >
+          <Row justify="space-around" align={'middle'} style={{ height: "100%" }}>
+            <Space direction='vertical'>
+              <Space.Compact size="large" direction='vertical' block>
+                <Button type='text' onClick={() => setPage("assets")}>Ativos</Button>
+              </Space.Compact>
+              <Space.Compact size="large" direction='vertical' block>
+                <Button type='text' onClick={() => setPage("intern")}>Interno</Button>
+              </Space.Compact>
+              <Space.Compact size="large" direction='vertical' block>
+                <Button type='text' onClick={() => setPage("serviceOrder")}>Ordens de Serviço</Button>
+              </Space.Compact>
+
+            </Space>
+          </Row>
+        </Sider>
+        <Content>
+          {page === "assets" ?
+            <AssetsPage />
+            :
+            page === "intern" ?
+              <>
+                <Text>Intern</Text>
+              </> :
+              <><Text>else</Text></>}
+        </Content>
+        <Sider style={{ backgroundColor: '#FFFFFF' }} />
+      </Layout>
+      <Footer style={{ backgroundColor: '#abcabc' }} />
+
+    </Layout>
   );
 };
 

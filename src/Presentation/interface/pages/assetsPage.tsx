@@ -4,19 +4,19 @@ import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { MyMenu } from '../Menu';
 import { CollapseItem } from '../CollapseItem';
-import { fetchAssets, allData } from '../../api/api';
+import { fetchAssets, assets } from '../../api/fetchAssets';
 
 export function AssetsPage() {
 const items: MenuProps['items'] = [
   {
     label: 'Motor',
     key: 'motor',
-    icon: <SettingOutlined />,
+    icon: <SettingOutlined rev={undefined} />,
   },
   {
     label: 'Fan',
     key: 'fan',
-    icon: <AppstoreOutlined />,
+    icon: <AppstoreOutlined rev={undefined} />,
   },
 ];
 
@@ -25,7 +25,7 @@ const onClick: MenuProps['onClick'] = (e) => {
   setCurrentKey(e.key);
 };
 
-const [assetsData, setAssetsData] = useState<allData[]>([]);
+const [assetsData, setAssetsData] = useState<assets[]>([]);
 useEffect(() => {
   fetchAssets().then((data) => {
     if (data) {

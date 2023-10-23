@@ -2,14 +2,14 @@ import { Typography, Image, Col, Row, Menu, MenuProps } from "antd";
 import {
   MailOutlined,
 } from '@ant-design/icons';
-import { allData } from "../api/api";
+import { assets } from "../api/fetchAssets";
 
 const { Text } = Typography;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 interface assetsProps {
-  data: allData;
+  data: assets;
 }
 
 function getItem(
@@ -17,28 +17,18 @@ function getItem(
   key?: React.Key | null,
   icon?: React.ReactNode,
   children?: MenuItem[],
-  type?: 'group',
 ): MenuItem {
   return {
     key,
     icon,
     children,
     label,
-    type,
   } as MenuItem;
 }
 
-export function CollapseItem(assets: assetsProps) {
-  const items: MenuItem[] = [
-    getItem('Navigation One', 'sub1', <MailOutlined />, [
-      getItem('Option 1', '1'),
-      getItem('Option 2', '2'),
-      getItem('Option 3', '3'),
-      getItem('Option 4', '4'),
-      getItem('Option 5', '5'),
-    ])
-  ];
 
+export function CollapseItem(assets: assetsProps) {
+ 
   return (
     <Row>
       <Col>
@@ -46,7 +36,7 @@ export function CollapseItem(assets: assetsProps) {
       </Col>
       <Col>
         <Col>
-          <Menu mode="horizontal" items={items}></Menu>
+          <Text> {assets.data.name}</Text>
         </Col>
         <Col >
           <Text>CompanyId: {assets.data.companyId}</Text>
