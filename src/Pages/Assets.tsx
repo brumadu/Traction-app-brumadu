@@ -2,11 +2,11 @@ import { Col, Row } from 'antd';
 import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
-import { MyMenu } from '../Menu';
-import { CollapseItem } from '../CollapseItem';
-import { fetchAssets, assets } from '../../api/fetchAssets';
+import { MyMenu } from '../Components/Menu';
+import { CollapseItem } from '../Components/CollapseItem';
+import { fetchAssets, assets } from '../api/fetchAssets';
 
-export function AssetsPage() {
+export function Assets() {
 const items: MenuProps['items'] = [
   {
     label: 'Motor',
