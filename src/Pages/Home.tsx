@@ -5,7 +5,9 @@ import { Sidebar } from '../Components/Sidebar';
 const { Text } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
-export default function Home() {
-  return (null);
+export function Home() {
+  return(
+      <Sidebar/>
+    )
 };
 
