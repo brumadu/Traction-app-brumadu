@@ -10,6 +10,9 @@ export function Sidebar() {
         <Sider theme='light' >
         <Row justify="space-around" align={'middle'} style={{ height: "100%" }}>
           <Space direction='vertical'>
+          <Space.Compact size="large" direction='vertical' block>
+              <Button type='text' onClick={() => navigate("/")}>Home</Button>
+            </Space.Compact>
             <Space.Compact size="large" direction='vertical' block>
               <Button type='text' onClick={() => navigate("/assets")}>Ativos</Button>
             </Space.Compact>

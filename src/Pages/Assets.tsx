@@ -4,7 +4,8 @@ import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { MyMenu } from '../Components/Menu';
 import { CollapseItem } from '../Components/CollapseItem';
-import { fetchAssets, assets } from '../api/fetchAssets';
+import { assets } from '../api/fetchAssets';
+import { getAssetsData } from '../utils/getAssetsData';
 
 export function Assets() {
 const items: MenuProps['items'] = [
@@ -26,15 +27,14 @@ const onClick: MenuProps['onClick'] = (e) => {
 };
 
 const [assetsData, setAssetsData] = useState<assets[]>([]);
+  
 useEffect(() => {
-  fetchAssets().then((data) => {
+  getAssetsData().then((data) => {
     if (data) {
       setAssetsData(data);
-    } else {
-      console.error("Error fetching data");
     }
-  }).catch((error) => console.error(error));
-}, [])
+  });
+}, []);
 
 const options = {
   title: {

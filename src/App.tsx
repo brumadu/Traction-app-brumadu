@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import { Route, Routes } from 'react-router-dom';
 import { Assets } from './Pages/Assets';
 import { Home } from './Pages/Home';
-import { Sidebar } from './Components/Sidebar';
+import { Sidebar } from './Components/Layout/Sidebar';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -18,6 +18,8 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/assets" element={<Assets />} />
+                        <Route path="/intern" element={<Assets />} />
+                        <Route path="/workorder" element={<Assets />} />
                     </Routes>
                 </Content>
                 <Sider style={{ backgroundColor: '#FFFFFF' }} />

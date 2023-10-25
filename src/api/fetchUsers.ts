@@ -8,7 +8,7 @@ interface users{
     unitId: string;
 }
 
-export function fetchUsers(): Promise<users[]> {
+export async function fetchUsers(): Promise<users[]> {
     return axios
       .get<users[]>(`${process.env.REACT_APP_API_URL}/users`)
       .then((response) => response.data)

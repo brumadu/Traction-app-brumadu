@@ -34,9 +34,9 @@ export interface assets {
     unitId: number;
 }
 
-export function fetchAssets(): Promise<assets[]> {
-    return axios
-      .get<assets[]>(`${process.env.REACT_APP_API_URL}/assets`)
-      .then((response) => response.data)
+export async function fetchAssets( id: string | undefined = "" ): Promise<assets[]> {
+    const response = await axios
+    .get<assets[]>(`${process.env.REACT_APP_API_URL}/assets/${id}`);
+  return response.data;
   }
   

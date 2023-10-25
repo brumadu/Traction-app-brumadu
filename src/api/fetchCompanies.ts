@@ -5,7 +5,7 @@ interface companies{
     name: string;
 }
 
-export function fetchCompanies(): Promise<companies[]> {
+export async function fetchCompanies(): Promise<companies[]> {
     return axios
       .get<companies[]>(`${process.env.REACT_APP_API_URL}/companies`)
       .then((response) => response.data)
