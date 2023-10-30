@@ -18,18 +18,17 @@ export function Home() {
   }, []);
 
   return (
-    <Layout style={{ backgroundColor: '#F1F1FF' }}>
-      <Card>
-
+      <Card style={{ height: '85vh'}}>
         <Row justify={"space-around"}>
           <Col span={12}>
             <Col>
               <Title level={4}> Ativos em Alerta </Title>
             </Col>
-            <Card style={{ width: '90%' }}>
+            <Card style={{ width: '90%', height: '75vh', overflowY: 'scroll'}}>
               <Flex align='center' vertical>
-                <Col style={{ overflow: "auto", height: '78vh', width: '90%' }}>
+                <Col style={{ overflow: "auto", width: '90%' }}>
                   <AssetChart />
+                  
                 </Col>
               </Flex>
             </Card>
@@ -38,9 +37,9 @@ export function Home() {
             <Col>
               <Title level={4}> Ordens de serviço em aberto </Title>
             </Col>
-            <Card style={{ width: '90%', height: '90%' }}>
+            <Card style={{ width: '90%', height: '75vh', overflowY: 'scroll'}}>
               <Flex align='center' vertical>
-                <Col style={{ overflow: "auto", height: '78vh', width: '90%' }}>
+                <Col style={{ overflow: "auto", width: '90%' }}>
                   <Row justify={"center"}>
                     {
                       workordersData.map((item) => (
@@ -65,7 +64,6 @@ export function Home() {
           </Col>
         </Row>
       </Card>
-    </Layout>
   )
 };
 
