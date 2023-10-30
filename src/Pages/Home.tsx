@@ -1,4 +1,4 @@
-import { Col, Layout, Typography, Row } from 'antd';
+import { Col, Layout, Typography, Row, List, Pagination, Space, Flex, Divider, Card } from 'antd';
 import { AssetChart } from '../Components/Templates/AssetChartHome';
 import { WorkorderCardHome } from '../Components/Templates/WorkorderCardHome';
 import { fetchWorkorders, workorders } from '../api/fetchWorkorders';
@@ -18,64 +18,53 @@ export function Home() {
   }, []);
 
   return (
-    <Layout>
-      <Row style={{ backgroundColor: '#FFFFFF' }}>
-        <Col span={12}>
-          <Row justify={'center'} >
-            <Col style={{ backgroundColor: '#aaaaaa', borderRadius: 20, paddingInline: 10 }}>
-              <Title level={4}> ATIVOS EM ALERTA </Title>
-            </Col>
-          </Row>
-          <Col>
-            <AssetChart />
-          </Col>
-        </Col>
-        <Col span={12}>
-          <Row justify={'center'} >
-            <Col style={{ backgroundColor: '#aaaaaa', borderRadius: 20, paddingInline: 10 }}>
-              <Title level={4}> ORDEM DE SERVIÇO </Title>
-            </Col>
-          </Row>
-          <Row>
-            {
-              workordersData.map((item) => (
-                (item.priority === "high") ?
-                  <WorkorderCardHome 
-                  title={item.title} 
-                  priority={item.priority} 
-                  description={item.description} 
-                  checklist={item.checklist} 
-                  assignedUsersId={item.assignedUsersId} />
-                  : null
-              ))
-            }
+    <Layout style={{ backgroundColor: '#F1F1FF' }}>
+      <Card>
 
-            {/* <Col>
-              <Text> MAIOR PRIORIDADE 1 </Text>
-              <Col>
-                <Text>Priority</Text>
-                <Text>Title</Text>
-                <Text>Description</Text>
-                <Text>Checklist with False</Text>
-                <Text>task Description</Text>
-                <Text>Assigned Users</Text>
-
-              </Col>
-            </Col> */}
+        <Row justify={"space-around"}>
+          <Col span={12}>
             <Col>
-              <Text> MAIOR PRIORIDADE 2 </Text>
-              <Col>
-                <Text>Priority</Text>
-                <Text>Title</Text>
-                <Text>Description</Text>
-                <Text>Checklist with False</Text>
-                <Text>task Description</Text>
-                <Text>Assigned Users</Text>
-              </Col>
+              <Title level={4}> Ativos em Alerta </Title>
             </Col>
-          </Row>
-        </Col>
-      </Row>
+            <Card style={{ width: '90%' }}>
+              <Flex align='center' vertical>
+                <Col style={{ overflow: "auto", height: '78vh', width: '90%' }}>
+                  <AssetChart />
+                </Col>
+              </Flex>
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Col>
+              <Title level={4}> Ordens de serviço em aberto </Title>
+            </Col>
+            <Card style={{ width: '90%', height: '90%' }}>
+              <Flex align='center' vertical>
+                <Col style={{ overflow: "auto", height: '78vh', width: '90%' }}>
+                  <Row justify={"center"}>
+                    {
+                      workordersData.map((item) => (
+                        (item.status === "in progress") ?
+                          <>
+                            <WorkorderCardHome
+                              title={item.title}
+                              priority={item.priority}
+                              description={item.description}
+                              checklist={item.checklist}
+                              assignedUsersId={item.assignedUsersId}
+                              status={item.status} /><Divider />
+                          </>
+                          : null
+                      ))
+                    }
+                  </Row>
+                </Col>
+              </Flex>
+            </Card>
+
+          </Col>
+        </Row>
+      </Card>
     </Layout>
   )
 };

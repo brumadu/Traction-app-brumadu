@@ -19,16 +19,17 @@ export function AssetChart() {
     const options = assetsData.map((item) => (
         {
             title: {
-                text: item.name,
+                text: `<span>${item.name}<br/>Saúde do ativo:</span>`,
             },
             subtitle:{
                 textSize: '100',
                 text: `<span style="font-size: 20px; font-weight: bold">Em Alerta<br/>${item.healthscore}%</span>`,
                 align: 'center',
                 verticalAlign: 'middle',
-                y: 100,
+                y: 75,
             },
             chart: {
+                height: "65%",
                 plotBackgroundColor: null,
                 plotBorderWidth: 0,
                 plotShadow: false
@@ -36,12 +37,15 @@ export function AssetChart() {
             tooltip: {
                 enabled: false
             },
+            Animation: {
+                enabled: false
+            },
             plotOptions: {
                 pie: {
                     startAngle: -90,
                     endAngle: 90,
-                    center: ['50%', '80%'],
-                    size: "150%"
+                    center: ['50%', '70%'],
+                    size: "130%"
                 }
             },
             series: [{
