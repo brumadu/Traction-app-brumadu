@@ -43,6 +43,7 @@ export function Assets() {
               </Card>
             </Col>
           </Col>
+
         ))}
       </Row>
 

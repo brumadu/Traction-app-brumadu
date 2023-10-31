@@ -17,7 +17,6 @@ export function WorkorderCardHome(cardData: workorders) {
                     </Col>
                 </Row>
                 <Text>{cardData.description}</Text>
-                <Divider/>
                 <Title level={3}> Tarefas Restantes: </Title>
                 {cardData.checklist.map((item) => (
                     (item.completed)? null :
