@@ -6,7 +6,7 @@ interface metricsData {
     totalUptime: number;
   }
   
-  interface healthHistoryData {
+  export interface healthHistoryData {
     status: string;
     timeStamp: Date;
   }
@@ -17,7 +17,7 @@ interface metricsData {
     rpm: number;
   }
 
-export interface assets {
+  export interface assets {
     data: any;
     id: number;
     name: string;

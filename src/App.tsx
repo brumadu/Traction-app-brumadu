@@ -18,22 +18,25 @@ export default function App() {
                     <Sider style={{ backgroundColor: '#F1F1FF' }} />
                 </Col>
                 <Col span={4}>
-                    <Sidebar />
+                    <Card style={{ height: '85vh', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                        <Sidebar />
+                    </Card>
                 </Col>
                 <Col span={16}>
-                    <Content>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/assets" element={<Assets />} />
-                            <Route path="/intern" element={<Assets />} />
-                            <Route path="/workorder" element={<Assets />} />
-                        </Routes>
-                    </Content>
+                    <Card style={{ height: '85vh' }}>
+                        <Content>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/assets" element={<Assets />} />
+                                <Route path="/intern" element={<Assets />} />
+                                <Route path="/workorder" element={<Assets />} />
+                            </Routes>
+                        </Content>
+                    </Card>
                 </Col>
                 <Col span={2}>
                     <Sider style={{ backgroundColor: '#F1F1FF' }} />
                 </Col>
-
             </Layout>
         </Layout>
     )

@@ -6,7 +6,7 @@ const { Title, Text } = Typography;
 
 export function WorkorderCardHome(cardData: workorders) {
     return (
-        <Card style={{ width: "100%" }}>
+        <Card hoverable={true} style={{ marginBottom: 10 }}>
             <Col>
                 <Row align={"top"} justify={"space-between"}>
                     <Col>

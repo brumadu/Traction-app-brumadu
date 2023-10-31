@@ -7,7 +7,6 @@ const { Sider, Content } = Layout;
 export function Sidebar() {
   const navigate = useNavigate();
   return (
-      <Card style={{ height: '85vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
           <Card>
             <Space.Compact size="large" direction='vertical' block>
               <Button type='text' onClick={() => navigate("/")}>Home</Button>
@@ -22,6 +21,5 @@ export function Sidebar() {
               <Button type='text' onClick={() => navigate("/workorder")}>Ordens de Serviço</Button>
             </Space.Compact>
           </Card>
-      </Card>
   )
 }

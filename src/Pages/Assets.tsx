@@ -1,67 +1,51 @@
-import { Col, Row } from 'antd';
-import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import { Card, Col, Row, Typography } from 'antd';
 import { useEffect, useState } from 'react';
-import { MyMenu } from '../Components/Menu';
-import { CollapseItem } from '../Components/CollapseItem';
+import { AssetCard } from '../Components/Templates/AssetCard';
 import { assets } from '../api/fetchAssets';
 import { getAssetsData } from '../utils/getAssetsData';
 
+const { Text, Title } = Typography;
+
+
 export function Assets() {
-const items: MenuProps['items'] = [
-  {
-    label: 'Motor',
-    key: 'motor',
-    icon: <SettingOutlined rev={undefined} />,
-  },
-  {
-    label: 'Fan',
-    key: 'fan',
-    icon: <AppstoreOutlined rev={undefined} />,
-  },
-];
+  const [assetModelList, setAssetModelList] = useState<String[]>([]);
+  const [assetsData, setAssetsData] = useState<assets[]>([]);
 
-const [currentKey, setCurrentKey] = useState('motor');
-const onClick: MenuProps['onClick'] = (e) => {
-  setCurrentKey(e.key);
-};
+  useEffect(() => {
+    getAssetsData().then((data) => {
+      if (data) {
+        setAssetsData(data);
+      }
+    });
+  }, []);
 
-const [assetsData, setAssetsData] = useState<assets[]>([]);
-  
-useEffect(() => {
-  getAssetsData().then((data) => {
-    if (data) {
-      setAssetsData(data);
-    }
-  });
-}, []);
+  useEffect(() => {
+    const unique = [... new Set(assetsData.map((item) => item.model))]
+    setAssetModelList(unique)
+  }, [assetModelList])
 
-const options = {
-  title: {
-    text: 'Health History',
-  },
-  yAxis: [
-    {
-      text: 'TimeStamp',
-      data: [],
-    }
-  ]
-};
 
   return (
     <Col>
-      <Row justify='space-around'>
-        <MyMenu data={'fan'} items={items} onClick={onClick} />
-      </Row>
-      <Row gutter={16} justify="center">
-        {assetsData.map((item) => (
-          item.model === currentKey ?
-            <Col span={12}>
-              <CollapseItem data={item} />
+      <Row style={{ overflowX: 'auto', marginBottom: 10 }}>
+        {assetModelList.map((assetModelType) => (
+          <Col span={12}>
+            <Col>
+              <Title level={4}> {assetModelType} </Title>
             </Col>
-            : <></>
+            <Col>
+              <Card style={{ width: '90%', height: '75vh', overflowY: 'auto', backgroundColor: '#fbfbfb', justifyContent: 'center' }}>
+                {assetsData.map((item) => (
+                  item.model === assetModelType ?
+                    <AssetCard data={item} />
+                    : null
+                ))}
+              </Card>
+            </Col>
+          </Col>
         ))}
       </Row>
+
     </Col>
   );
 }

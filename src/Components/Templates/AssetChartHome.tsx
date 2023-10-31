@@ -1,29 +1,20 @@
-import { Col } from "antd";
+import { Card, Col } from "antd";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { assets, fetchAssets } from "../../api/fetchAssets";
-import { useEffect, useState } from "react";
+import { assets } from "../../api/fetchAssets";
 
-export function AssetChart() {
-    const [assetsData, setAssetsData] = useState<assets[]>([]);
+interface assetsProps {
+    data: assets;
+  }
 
-    useEffect(() => {
-        fetchAssets().then((data) => {
-            if (data) {
-                setAssetsData(data);
-            }
-        });
-    }, []);
+export function AssetChart(assets: assetsProps) {
 
-
-    const options = assetsData.map((item) => (
-        {
+const options = {
             title: {
-                text: `<span>${item.name}<br/>Saúde do ativo:</span>`,
+                text: `<span>${assets.data.name}<br/>Saúde do ativo:</span>`,
             },
-            subtitle:{
-                textSize: '100',
-                text: `<span style="font-size: 20px; font-weight: bold">Em Alerta<br/>${item.healthscore}%</span>`,
+            subtitle: {
+                text: `<span style="font-size: 17px; font-weight: bold">Em Alerta<br/>${assets.data.healthscore}%</span>`,
                 align: 'center',
                 verticalAlign: 'middle',
                 y: 75,
@@ -52,14 +43,14 @@ export function AssetChart() {
                 type: 'pie',
                 innerSize: '50%',
                 data: [{
-                    y: item.healthscore,
+                    y: assets.data.healthscore,
                     dataLabels: {
                         enabled: false
                     },
                     color: "#941B0C",
                 },
                 {
-                    y: 100 - item.healthscore,
+                    y: 100 - assets.data.healthscore,
                     dataLabels: {
                         enabled: false
                     },
@@ -67,18 +58,14 @@ export function AssetChart() {
                 }],
             }]
         }
-    ))
 
 
     return (
-        <Col>
-            {assetsData.map((item, i) => (
-                (item.status === "inAlert")
-                    ?
-                    <HighchartsReact highcharts={Highcharts} options={options[i]} />
-                    : null
-            ))}
-        </Col>
+        <>
+            <Card hoverable={true} style={{ width: '100%', marginBottom: 10, maxHeight: '30vh' }}>
+                <HighchartsReact highcharts={Highcharts} options={options} />
+            </Card>
+        </>
     )
 }
 
