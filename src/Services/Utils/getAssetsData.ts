@@ -1,4 +1,4 @@
-import { fetchAssets } from "../api/fetchAssets";
+import { fetchAssets } from "../Axios/fetchAssets";
 
 export const getAssetsData = async () => {
     try {

@@ -1,11 +1,10 @@
-import { Card, Col, Row, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import { AssetCard } from '../Components/Templates/AssetCard';
-import { assets } from '../api/fetchAssets';
-import { getAssetsData } from '../utils/getAssetsData';
+import { Card, Col, Row, Typography } from "antd";
+import { useEffect, useState } from "react";
+import { AssetCard } from "../Components/Templates/AssetCard";
+import { assets } from "../Services/Axios/fetchAssets";
+import { getAssetsData } from "../Services/Utils/getAssetsData";
 
 const { Text, Title } = Typography;
-
 
 export function Assets() {
   const [assetModelList, setAssetModelList] = useState<String[]>([]);
@@ -20,33 +19,38 @@ export function Assets() {
   }, []);
 
   useEffect(() => {
-    const unique = [... new Set(assetsData.map((item) => item.model))]
-    setAssetModelList(unique)
-  }, [assetModelList])
-
+    const unique = [...new Set(assetsData.map((item) => item.model))];
+    setAssetModelList(unique);
+  }, [assetModelList]);
 
   return (
     <Col>
-      <Row style={{ overflowX: 'auto', marginBottom: 10 }}>
+      <Row style={{ overflowX: "auto", marginBottom: 10 }}>
         {assetModelList.map((assetModelType) => (
           <Col span={12}>
             <Col>
               <Title level={4}> {assetModelType} </Title>
             </Col>
             <Col>
-              <Card style={{ width: '90%', height: '75vh', overflowY: 'auto', backgroundColor: '#fbfbfb', justifyContent: 'center' }}>
-                {assetsData.map((item) => (
-                  item.model === assetModelType ?
+              <Card
+                style={{
+                  width: "90%",
+                  height: "75vh",
+                  overflowY: "auto",
+                  backgroundColor: "#fbfbfb",
+                  justifyContent: "center",
+                }}
+              >
+                {assetsData.map((item) =>
+                  item.model === assetModelType ? (
                     <AssetCard data={item} />
-                    : null
-                ))}
+                  ) : null
+                )}
               </Card>
             </Col>
           </Col>
-
         ))}
       </Row>
-
     </Col>
   );
 }
