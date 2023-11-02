@@ -7,7 +7,7 @@ interface assetsProps {
   data: assets;
 }
 
-export function AssetChart(assets: assetsProps) {
+export function CardAssetHome(assets: assetsProps) {
   const options = {
     title: {
       text: `<span>${assets.data.name}<br/>Saúde do ativo:</span>`,
@@ -63,13 +63,11 @@ export function AssetChart(assets: assetsProps) {
   };
 
   return (
-    <>
-      <Card
-        hoverable={true}
-        style={{ width: "100%", marginBottom: 10, maxHeight: "30vh" }}
-      >
-        <HighchartsReact highcharts={Highcharts} options={options} />
-      </Card>
-    </>
+    <Card
+      hoverable={true}
+      style={{ width: "100%", marginBottom: 10, maxHeight: "30vh" }}
+    >
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </Card>
   );
 }

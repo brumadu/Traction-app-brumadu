@@ -1,9 +1,10 @@
 import { Col, Typography, Row, Card } from "antd";
-import { AssetChart } from "../Components/Templates/AssetChartHome";
-import { WorkorderCardHome } from "../Components/Templates/WorkorderCardHome";
 import { fetchWorkorders, workorders } from "../Services/Axios/fetchWorkorders";
 import { useEffect, useState } from "react";
 import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
+import { CardWorkorder } from "../Components/CardWorkorderHome/CardWorkorder";
+import { CardAssets } from "../Components/CardAssets/CardAssets";
+import { CardAssetHome } from "../Components/CardAssetHome/ChartAssetHealth";
 
 const { Title } = Typography;
 
@@ -43,7 +44,7 @@ export function Home() {
             }}
           >
             {assetsData.map((item, i) =>
-              item.status === "inAlert" ? <AssetChart data={item} /> : null
+              item.status === "inAlert" ? <CardAssetHome data={item} /> : null
             )}
           </Card>
         </Col>
@@ -61,7 +62,7 @@ export function Home() {
           >
             {workordersData.map((item) =>
               item.status === "in progress" ? (
-                <WorkorderCardHome
+                <CardWorkorder
                   title={item.title}
                   priority={item.priority}
                   description={item.description}

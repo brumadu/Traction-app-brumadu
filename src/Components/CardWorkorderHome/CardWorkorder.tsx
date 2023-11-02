@@ -4,7 +4,7 @@ import { workorders } from "../../Services/Axios/fetchWorkorders";
 
 const { Title, Text } = Typography;
 
-export function WorkorderCardHome(cardData: workorders) {
+export function CardWorkorder(cardData: workorders) {
   return (
     <Card hoverable={true} style={{ marginBottom: 10 }}>
       <Col>

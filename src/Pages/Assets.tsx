@@ -1,10 +1,10 @@
 import { Card, Col, Row, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { AssetCard } from "../Components/Templates/AssetCard";
 import { assets } from "../Services/Axios/fetchAssets";
 import { getAssetsData } from "../Services/Utils/getAssetsData";
+import { CardAssets } from "../Components/CardAssets/CardAssets";
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 
 export function Assets() {
   const [assetModelList, setAssetModelList] = useState<String[]>([]);
@@ -43,7 +43,7 @@ export function Assets() {
               >
                 {assetsData.map((item) =>
                   item.model === assetModelType ? (
-                    <AssetCard data={item} />
+                    <CardAssets data={item} />
                   ) : null
                 )}
               </Card>

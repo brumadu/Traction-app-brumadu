@@ -6,9 +6,9 @@ interface metricsData {
     totalUptime: number;
   }
   
-  export interface healthHistoryData {
+  export interface HealthHistoryData {
     status: string;
-    timeStamp: Date;
+    timestamp: Date;
   }
   
   interface specificationsData {
@@ -23,7 +23,7 @@ interface metricsData {
     name: string;
     assignedUserIds: [string];
     companyId: string;
-    healthHistory: [healthHistoryData];
+    healthHistory: [HealthHistoryData];
     healthscore: number;
     image: string;
     metrics: metricsData;
