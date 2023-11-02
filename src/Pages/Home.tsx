@@ -3,7 +3,6 @@ import { fetchWorkorders, workorders } from "../Services/Axios/fetchWorkorders";
 import { useEffect, useState } from "react";
 import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
 import { CardWorkorder } from "../Components/CardWorkorderHome/CardWorkorder";
-import { CardAssets } from "../Components/CardAssets/CardAssets";
 import { CardAssetHome } from "../Components/CardAssetHome/ChartAssetHealth";
 
 const { Title } = Typography;

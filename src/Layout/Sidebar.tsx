@@ -32,18 +32,18 @@ export function Sidebar() {
         </Space.Compact>
         <Space.Compact size="large" direction="vertical" block>
           <Button
-            type={location.pathname === "/intern" ? "primary" : "text"}
-            onClick={() => navigate("/intern")}
-          >
-            Interno
-          </Button>
-        </Space.Compact>
-        <Space.Compact size="large" direction="vertical" block>
-          <Button
             type={location.pathname === "/workorder" ? "primary" : "text"}
             onClick={() => navigate("/workorder")}
           >
             Ordens de Serviço
+          </Button>
+        </Space.Compact>
+        <Space.Compact size="large" direction="vertical" block>
+          <Button
+            type={location.pathname === "/intern" ? "primary" : "text"}
+            onClick={() => navigate("/intern")}
+          >
+            Interno
           </Button>
         </Space.Compact>
       </Card>

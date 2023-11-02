@@ -2,13 +2,14 @@ import { Typography, Image, Col, Row, Card, Modal } from "antd";
 
 import { assets } from "../../Services/Axios/fetchAssets";
 import { useState } from "react";
-import { ChartAssets } from "./ChartAssets";
 import { ModalAsset } from "./ModalAsset";
+import { users } from "../../Services/Axios/fetchUsers";
 
 const { Title } = Typography;
 
 interface assetsProps {
-  data: assets;
+  assetsData: assets;
+  users: users[];
 }
 
 export function CardAssets(assets: assetsProps) {
@@ -24,38 +25,36 @@ export function CardAssets(assets: assetsProps) {
 
   return (
     <>
-      <Card
-        hoverable={true}
-        style={{ width: "100%", marginBottom: 10 }}
-        onClick={showModal}
-      >
+      <Card hoverable={true} style={{ marginBottom: 10 }} onClick={showModal}>
         <Row>
           <Col span={14}>
-            <Title level={3}> {assets.data.name} </Title>
+            <Title level={3}> {assets.assetsData.name} </Title>
             <Col>
-              <Title level={5}>{"Status: " + assets.data.status}</Title>
-            </Col>
-            <Col>
-              <Title level={5}>{"CompanyId: " + assets.data.companyId}</Title>
+              <Title level={5}>{"Status: " + assets.assetsData.status}</Title>
             </Col>
             <Col>
               <Title level={5}>
-                {"Healthscore: " + assets.data.healthscore + "%"}
+                {"CompanyId: " + assets.assetsData.companyId}
               </Title>
             </Col>
             <Col>
-              <Title level={5}>{"Unidade: " + assets.data.unitId}</Title>
+              <Title level={5}>
+                {"Healthscore: " + assets.assetsData.healthscore + "%"}
+              </Title>
+            </Col>
+            <Col>
+              <Title level={5}>{"Unidade: " + assets.assetsData.unitId}</Title>
             </Col>
             <Col>
               <Title level={5}>
-                {"Responsáveis: " + assets.data.assignedUserIds}
+                {"Responsáveis: " + assets.assetsData.assignedUserIds}
               </Title>
             </Col>
           </Col>
           <Col span={10}>
             <Image
               preview={false}
-              src={assets.data.image}
+              src={assets.assetsData.image}
               style={{ borderRadius: 10, maxHeight: "20vh", width: "17vh" }}
             />
           </Col>
@@ -64,7 +63,8 @@ export function CardAssets(assets: assetsProps) {
       <ModalAsset
         isModalOpen={isModalOpen}
         handleCancel={handleCancel}
-        data={assets.data}
+        data={assets.assetsData}
+        users={assets.users}
       />
     </>
   );

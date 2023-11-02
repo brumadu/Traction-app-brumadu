@@ -11,7 +11,7 @@ interface assetsHistoryProps {
   assets: HealthHistoryData[];
 }
 
-export function ChartAssets(assetsHistory: assetsHistoryProps) {
+export function ChartModalAssets(assetsHistory: assetsHistoryProps) {
   const status = assetsHistory.assets.map((item) => item.status);
 
   const statusType = [...new Set(status)];
@@ -27,6 +27,18 @@ export function ChartAssets(assetsHistory: assetsHistoryProps) {
   const options = {
     chart: {
       type: "line",
+
+      backgroundColor: "#f1f1f1",
+      plotBackgroundColor: "#ffffff",
+      plotBorderWidth: 2,
+    },
+    navigation: {
+      buttonOptions: {
+        enabled: false,
+      },
+    },
+    title: {
+      text: "Status da operação",
     },
     tooltip: {
       enabled: false,
@@ -46,14 +58,10 @@ export function ChartAssets(assetsHistory: assetsHistoryProps) {
         name: "status",
         type: "line",
         data: status.map((item) => statusType.indexOf(item)),
+        color: "#4BB543",
       },
     ],
   };
 
-  return (
-    <Col>
-      <Title></Title>
-      <HighchartsReact highcharts={Highcharts} options={options} />
-    </Col>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={options} />;
 }

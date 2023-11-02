@@ -1,19 +1,28 @@
 import { Card, Col, Row, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { assets } from "../Services/Axios/fetchAssets";
-import { getAssetsData } from "../Services/Utils/getAssetsData";
+import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
 import { CardAssets } from "../Components/CardAssets/CardAssets";
+import { users, fetchUsers } from "../Services/Axios/fetchUsers";
 
 const { Title } = Typography;
 
 export function Assets() {
   const [assetModelList, setAssetModelList] = useState<String[]>([]);
   const [assetsData, setAssetsData] = useState<assets[]>([]);
+  const [users, setUsers] = useState<users[]>([]);
 
   useEffect(() => {
-    getAssetsData().then((data) => {
+    fetchAssets().then((data) => {
       if (data) {
         setAssetsData(data);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchUsers().then((data) => {
+      if (data) {
+        setUsers(data);
       }
     });
   }, []);
@@ -43,7 +52,7 @@ export function Assets() {
               >
                 {assetsData.map((item) =>
                   item.model === assetModelType ? (
-                    <CardAssets data={item} />
+                    <CardAssets assetsData={item} users={users} />
                   ) : null
                 )}
               </Card>

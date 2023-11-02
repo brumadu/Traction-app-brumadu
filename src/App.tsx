@@ -4,6 +4,7 @@ import { Assets } from "./Pages/Assets";
 import { Home } from "./Pages/Home";
 import { Sidebar } from "./Layout/Sidebar";
 import { HeaderLayout } from "./Layout/Header";
+import { Workorder } from "./Pages/Workorder";
 
 const { Sider, Content } = Layout;
 
@@ -24,8 +25,8 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/assets" element={<Assets />} />
+                <Route path="/workorder" element={<Workorder />} />
                 <Route path="/intern" element={<Assets />} />
-                <Route path="/workorder" element={<Assets />} />
               </Routes>
             </Content>
           </Card>

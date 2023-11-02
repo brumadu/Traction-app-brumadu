@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface users{
+export interface users{
     id: string;
     companyId: string;
     email: string;
