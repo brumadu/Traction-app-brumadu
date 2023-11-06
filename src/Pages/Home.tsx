@@ -2,14 +2,24 @@ import { Col, Typography, Row, Card } from "antd";
 import { fetchWorkorders, workorders } from "../Services/Axios/fetchWorkorders";
 import { useEffect, useState } from "react";
 import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
-import { CardWorkorder } from "../Components/CardWorkorderHome/CardWorkorder";
+import { CardWorkorder } from "../Components/CardWorkorder/CardWorkorder";
 import { CardAssetHome } from "../Components/CardAssetHome/ChartAssetHealth";
+import { users, fetchUsers } from "../Services/Axios/fetchUsers";
 
 const { Title } = Typography;
 
 export function Home() {
   const [workordersData, setWorkordersData] = useState<workorders[]>([]);
   const [assetsData, setAssetsData] = useState<assets[]>([]);
+  const [users, setUsers] = useState<users[]>([]);
+
+  useEffect(() => {
+    fetchUsers().then((data) => {
+      if (data) {
+        setUsers(data);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     fetchAssets().then((data) => {
@@ -59,15 +69,12 @@ export function Home() {
               backgroundColor: "#fbfbfb",
             }}
           >
-            {workordersData.map((item) =>
+            {workordersData.map((item, index) =>
               item.status === "in progress" ? (
                 <CardWorkorder
-                  title={item.title}
-                  priority={item.priority}
-                  description={item.description}
-                  checklist={item.checklist}
-                  assignedUsersId={item.assignedUsersId}
-                  status={item.status}
+                  assets={assetsData}
+                  workordersData={workordersData[index]}
+                  users={users}
                 />
               ) : null
             )}

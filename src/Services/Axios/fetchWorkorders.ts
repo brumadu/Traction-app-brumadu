@@ -7,8 +7,8 @@ interface checklistData {
 
 export interface workorders {
     id?: string;
-    assetsId?: string;
-    assignedUsersId: [string];
+    assetId?: string;
+    assignedUserIds: [string];
     checklist: [checklistData];
     description: string;
     priority: string;

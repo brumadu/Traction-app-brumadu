@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ModalAsset } from "./ModalAsset";
 import { users } from "../../Services/Axios/fetchUsers";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 interface assetsProps {
   assetsData: assets;
@@ -34,11 +34,6 @@ export function CardAssets(assets: assetsProps) {
             </Col>
             <Col>
               <Title level={5}>
-                {"CompanyId: " + assets.assetsData.companyId}
-              </Title>
-            </Col>
-            <Col>
-              <Title level={5}>
                 {"Healthscore: " + assets.assetsData.healthscore + "%"}
               </Title>
             </Col>
@@ -46,9 +41,16 @@ export function CardAssets(assets: assetsProps) {
               <Title level={5}>{"Unidade: " + assets.assetsData.unitId}</Title>
             </Col>
             <Col>
-              <Title level={5}>
-                {"Responsáveis: " + assets.assetsData.assignedUserIds}
-              </Title>
+              <Title level={5}>Responsáveis: </Title>
+              {assets.assetsData.assignedUserIds.map((item) => (
+                <Col>
+                  <Text>
+                    {assets.users[Number(item) - 1]?.name +
+                      " - " +
+                      assets.users[Number(item) - 1]?.email}
+                  </Text>
+                </Col>
+              ))}
             </Col>
           </Col>
           <Col span={10}>

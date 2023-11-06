@@ -42,11 +42,13 @@ export function ModalAsset(assets: modalProps) {
                 }}
               >
                 <Col>
-                  <Title level={5}>{assets.users[Number(item) - 1].name}</Title>
+                  <Title level={5}>
+                    {assets.users[Number(item) - 1]?.name}
+                  </Title>
                 </Col>
                 <Col>
                   <Title level={5}>
-                    {"Email: " + assets.users[Number(item) - 1].email}
+                    {"Email: " + assets.users[Number(item) - 1]?.email}
                   </Title>
                 </Col>
               </Col>

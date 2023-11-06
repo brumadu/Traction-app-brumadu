@@ -23,7 +23,7 @@ export default function App() {
           <Card style={{ height: "85vh" }}>
             <Content>
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" index element={<Home />} />
                 <Route path="/assets" element={<Assets />} />
                 <Route path="/workorder" element={<Workorder />} />
                 <Route path="/intern" element={<Assets />} />

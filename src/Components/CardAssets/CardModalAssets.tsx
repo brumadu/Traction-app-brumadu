@@ -41,11 +41,20 @@ export function CardModalAssets(assets: CardModalProps) {
           >
             <Title level={4}>Metrics</Title>
             <Space direction="vertical">
-              <Text>{"last uptime: " + assets.data.metrics.lastUptimeAt}</Text>
+              <Text>
+                {"last uptime: " +
+                  new Date(assets.data.metrics.lastUptimeAt).getUTCHours() +
+                  ":" +
+                  new Date(assets.data.metrics.lastUptimeAt).getUTCMinutes() +
+                  ":" +
+                  new Date(assets.data.metrics.lastUptimeAt).getUTCSeconds()}
+              </Text>
               <Text>
                 {"total Collects: " + assets.data.metrics.totalCollectsUptime}
               </Text>
-              <Text>{"total uptime: " + assets.data.metrics.totalUptime}</Text>
+              <Text>
+                {"total uptime: " + assets.data.metrics.totalUptime + "s"}
+              </Text>
             </Space>
           </Col>
         </Col>
