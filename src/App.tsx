@@ -5,6 +5,7 @@ import { Home } from "./Pages/Home";
 import { Sidebar } from "./Layout/Sidebar";
 import { HeaderLayout } from "./Layout/Header";
 import { Workorder } from "./Pages/Workorder";
+import { Intern } from "./Pages/Intern";
 
 const { Sider, Content } = Layout;
 
@@ -26,7 +27,7 @@ export default function App() {
                 <Route path="/" index element={<Home />} />
                 <Route path="/assets" element={<Assets />} />
                 <Route path="/workorder" element={<Workorder />} />
-                <Route path="/intern" element={<Assets />} />
+                <Route path="/intern" element={<Intern />} />
               </Routes>
             </Content>
           </Card>

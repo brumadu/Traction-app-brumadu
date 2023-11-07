@@ -34,7 +34,14 @@ export function Assets() {
 
   return (
     <Col>
-      <Row style={{ overflowX: "auto", marginBottom: 10 }}>
+      <Row
+        style={{
+          overflowX: "auto",
+          flexWrap: "nowrap", // Prevent items from wrapping
+          marginBottom: 10,
+        }}
+        justify={"start"}
+      >
         {assetModelList.map((assetModelType) => (
           <Col span={12}>
             <Col>

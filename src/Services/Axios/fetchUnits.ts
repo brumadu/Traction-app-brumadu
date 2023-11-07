@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface units {
+export interface units {
     id: string;
     companyId: string;
     name: string;

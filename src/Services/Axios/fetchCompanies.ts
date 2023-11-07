@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface companies{ 
+export interface companies{ 
     id: string;
     name: string;
 }
