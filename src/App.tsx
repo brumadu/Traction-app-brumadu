@@ -26,6 +26,7 @@ export default function App() {
               <Routes>
                 <Route path="/" index element={<Home />} />
                 <Route path="/assets" element={<Assets />} />
+                <Route path="/assets/:id" element={<Assets />} />
                 <Route path="/workorder" element={<Workorder />} />
                 <Route path="/intern" element={<Intern />} />
               </Routes>

@@ -5,6 +5,7 @@ import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
 import { CardWorkorder } from "../Components/CardWorkorder/CardWorkorder";
 import { CardAssetHome } from "../Components/CardAssetHome/ChartAssetHealth";
 import { users, fetchUsers } from "../Services/Axios/fetchUsers";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -37,6 +38,12 @@ export function Home() {
     });
   }, []);
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <Col>
       <Row justify={"space-around"}>
@@ -52,8 +59,12 @@ export function Home() {
               backgroundColor: "#fbfbfb",
             }}
           >
-            {assetsData.map((item, i) =>
-              item.status === "inAlert" ? <CardAssetHome data={item} /> : null
+            {assetsData.map((item) =>
+              item.status === "inAlert" ? (
+                <Link to={`/assets/${item.id}`} onClick={openModal}>
+                  <CardAssetHome data={item} />
+                </Link>
+              ) : null
             )}
           </Card>
         </Col>
@@ -71,11 +82,13 @@ export function Home() {
           >
             {workordersData.map((item, index) =>
               item.status === "in progress" ? (
-                <CardWorkorder
-                  assets={assetsData}
-                  workordersData={workordersData[index]}
-                  users={users}
-                />
+                <Link to="/workorder">
+                  <CardWorkorder
+                    assets={assetsData}
+                    workordersData={workordersData[index]}
+                    users={users}
+                  />
+                </Link>
               ) : null
             )}
           </Card>

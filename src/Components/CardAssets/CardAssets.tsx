@@ -10,10 +10,13 @@ const { Title, Text } = Typography;
 interface assetsProps {
   assetsData: assets;
   users: users[];
+  id?: number;
 }
 
 export function CardAssets(assets: assetsProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(
+    assets.id === assets.assetsData.id ? true : false
+  );
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -42,15 +45,19 @@ export function CardAssets(assets: assetsProps) {
             </Col>
             <Col>
               <Title level={5}>Responsáveis: </Title>
-              {assets.assetsData.assignedUserIds.map((item) => (
-                <Col>
-                  <Text>
-                    {assets.users[Number(item) - 1]?.name +
-                      " - " +
-                      assets.users[Number(item) - 1]?.email}
-                  </Text>
-                </Col>
-              ))}
+              {assets.assetsData.assignedUserIds.map((item) =>
+                assets.users[Number(item) - 1]?.name !== undefined ? (
+                  <Col>
+                    <Text>
+                      {assets.users[Number(item) - 1]?.name +
+                        " - " +
+                        assets.users[Number(item) - 1]?.email}
+                    </Text>
+                  </Col>
+                ) : (
+                  <></>
+                )
+              )}
             </Col>
           </Col>
           <Col span={10}>

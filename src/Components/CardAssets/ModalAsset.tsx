@@ -3,6 +3,7 @@ import { ChartModalAssets } from "./ChartModalAssets";
 import { assets } from "../../Services/Axios/fetchAssets";
 import { CardModalAssets } from "./CardModalAssets";
 import { users } from "../../Services/Axios/fetchUsers";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -32,26 +33,28 @@ export function ModalAsset(assets: modalProps) {
           <Col style={{ overflowY: "auto", height: "30vh" }}>
             <Title level={3}>Responsáveis:</Title>
             {assets.data.assignedUserIds.map((item) => (
-              <Col
-                style={{
-                  backgroundColor: "#f1f1f1",
-                  borderRadius: 10,
-                  width: "90%",
-                  marginBottom: 10,
-                  padding: 10,
-                }}
-              >
-                <Col>
-                  <Title level={5}>
-                    {assets.users[Number(item) - 1]?.name}
-                  </Title>
+              <Link to={"/intern"}>
+                <Col
+                  style={{
+                    backgroundColor: "#f1f1f1",
+                    borderRadius: 10,
+                    width: "90%",
+                    marginBottom: 10,
+                    padding: 10,
+                  }}
+                >
+                  <Col>
+                    <Title level={5}>
+                      {assets.users[Number(item) - 1]?.name}
+                    </Title>
+                  </Col>
+                  <Col>
+                    <Title level={5}>
+                      {"Email: " + assets.users[Number(item) - 1]?.email}
+                    </Title>
+                  </Col>
                 </Col>
-                <Col>
-                  <Title level={5}>
-                    {"Email: " + assets.users[Number(item) - 1]?.email}
-                  </Title>
-                </Col>
-              </Col>
+              </Link>
             ))}
           </Col>
         </Col>

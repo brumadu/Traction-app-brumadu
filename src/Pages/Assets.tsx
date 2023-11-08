@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
 import { CardAssets } from "../Components/CardAssets/CardAssets";
 import { users, fetchUsers } from "../Services/Axios/fetchUsers";
+import { useParams } from "react-router-dom";
 
 const { Title } = Typography;
 
 export function Assets() {
+  const { id } = useParams();
+
   const [assetModelList, setAssetModelList] = useState<String[]>([]);
   const [assetsData, setAssetsData] = useState<assets[]>([]);
   const [users, setUsers] = useState<users[]>([]);
@@ -59,7 +62,11 @@ export function Assets() {
               >
                 {assetsData.map((item) =>
                   item.model === assetModelType ? (
-                    <CardAssets assetsData={item} users={users} />
+                    <CardAssets
+                      assetsData={item}
+                      users={users}
+                      id={Number(id)}
+                    />
                   ) : null
                 )}
               </Card>

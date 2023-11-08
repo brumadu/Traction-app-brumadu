@@ -80,7 +80,7 @@ export function CardWorkorder(data: workordersData) {
               Usuários Responsáveis:
             </Title>
             {data.workordersData.assignedUserIds.map((item) =>
-              data.users ? (
+              data.users[Number(item) - 1]?.name !== undefined ? (
                 <Col>
                   <Text>
                     {data.users[Number(item) - 1]?.name +
