@@ -4,10 +4,13 @@ import { companies, fetchCompanies } from "../Services/Axios/fetchCompanies";
 import { fetchUnits, units } from "../Services/Axios/fetchUnits";
 import { fetchUsers, users } from "../Services/Axios/fetchUsers";
 import { CardIntern } from "../Components/CardIntern/CardIntern";
+import { useParams } from "react-router-dom";
 
 const { Title } = Typography;
 
 export function Intern() {
+  const { unitId } = useParams();
+
   const [companiesData, setCompaniesData] = useState<companies[]>([]);
   const [unitsData, setUnitsData] = useState<units[]>([]);
   const [usersData, setUsersData] = useState<users[]>([]);
@@ -34,64 +37,64 @@ export function Intern() {
         setUsersData(data);
       }
     });
-  });
+  }, []);
 
-  const [unityOpen, setUnityOpen] = useState<units>();
-  const [userOpen, setUserOpen] = useState<Boolean>(false);
-
-  const handleUserOpen = (unityData: units) => {
-    setUserOpen(true);
-    setUnityOpen(unityData);
-  };
+  const [unitOpenId, setUnitOpenId] = useState<number>(Number(unitId));
+  const [userOpen, setUserOpen] = useState<Boolean>(unitId ? true : false);
 
   return (
     <Col>
-      <Row
-        style={{
-          overflowX: "auto",
-          flexWrap: "nowrap", // Prevent items from wrapping
-          marginBottom: 10,
-        }}
-        justify={"start"}
-      >
-        {companiesData.map((company) => (
-          <>
-            <Col span={12}>
-              <Col>
-                <Title level={4}> {company.name} </Title>
-              </Col>
-              <Col>
-                <Card
-                  style={{
-                    width: "90%",
-                    height: "75vh",
-                    overflowY: "auto",
-                    backgroundColor: "#fbfbfb",
-                    justifyContent: "center",
-                  }}
-                >
-                  {unitsData.map((item) =>
-                    item.companyId === company.id ? (
-                      <Card
-                        hoverable={true}
-                        style={{ marginBottom: 10 }}
-                        onClick={() => handleUserOpen(item)}
-                      >
-                        <Col>
-                          <Title style={{ margin: 0 }}>{item.name}</Title>
-                        </Col>
-                      </Card>
-                    ) : null
-                  )}
-                </Card>
-              </Col>
+      {companiesData.map((company) => (
+        <Row
+          style={{
+            overflowX: "auto",
+            flexWrap: "nowrap",
+            marginBottom: 10,
+          }}
+          justify={"start"}
+        >
+          <Col span={12}>
+            <Col>
+              <Title level={4}> {company.name} </Title>
             </Col>
-            {userOpen && unityOpen?.companyId === company.id ? (
-              <CardIntern unityOpen={unityOpen} usersData={usersData} />
-            ) : null}
-          </>
-        ))}
-      </Row>
+            <Col>
+              <Card
+                style={{
+                  width: "90%",
+                  height: "75vh",
+                  overflowY: "auto",
+                  backgroundColor: "#fbfbfb",
+                  justifyContent: "center",
+                }}
+              >
+                {unitsData.map((item) =>
+                  item.companyId === company.id ? (
+                    <Card
+                      hoverable={true}
+                      style={{ marginBottom: 10 }}
+                      onClick={() => {
+                        setUnitOpenId(Number(item.id));
+                        setUserOpen(true);
+                      }}
+                    >
+                      <Col>
+                        <Title style={{ margin: 0 }}>{item.name}</Title>
+                      </Col>
+                    </Card>
+                  ) : null
+                )}
+              </Card>
+            </Col>
+          </Col>
+          {userOpen && usersData && (
+            <CardIntern
+              unityData={unitsData}
+              unitId={unitOpenId}
+              usersData={usersData}
+            />
+          )}
+        </Row>
+      ))}
     </Col>
   );
 }

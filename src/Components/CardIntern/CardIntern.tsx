@@ -5,7 +5,8 @@ import { users } from "../../Services/Axios/fetchUsers";
 const { Title } = Typography;
 
 interface cardInternData {
-  unityOpen?: units;
+  unitId: number;
+  unityData: units[];
   usersData: users[];
 }
 
@@ -13,7 +14,9 @@ export function CardIntern(data: cardInternData) {
   return (
     <Col span={12}>
       <Col>
-        <Title level={4}> {data.unityOpen?.name} </Title>
+        {data.unityData[data.unitId - 1] !== undefined ? (
+          <Title level={4}>{data.unityData[data.unitId - 1].name}</Title>
+        ) : null}
       </Col>
       <Col>
         <Card
@@ -25,20 +28,22 @@ export function CardIntern(data: cardInternData) {
             justifyContent: "center",
           }}
         >
-          {data.usersData.map((item) =>
-            item.unitId === data.unityOpen?.id ? (
-              <Card style={{ marginBottom: 10 }}>
-                <Row justify={"space-between"}>
-                  <Title level={4} style={{ margin: 0 }}>
-                    {item.name}
-                  </Title>
-                  <Title level={4} style={{ margin: 0 }}>
-                    {item.email}
-                  </Title>
-                </Row>
-              </Card>
-            ) : null
-          )}
+          {data.unityData[data.unitId - 1] !== undefined
+            ? data.usersData.map((item) =>
+                Number(item.unitId) === data.unitId ? (
+                  <Card style={{ marginBottom: 10 }}>
+                    <Row justify={"space-between"}>
+                      <Title level={4} style={{ margin: 0 }}>
+                        {item.name}
+                      </Title>
+                      <Title level={4} style={{ margin: 0 }}>
+                        {item.email}
+                      </Title>
+                    </Row>
+                  </Card>
+                ) : null
+              )
+            : null}
         </Card>
       </Col>
     </Col>

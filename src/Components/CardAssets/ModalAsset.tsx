@@ -32,8 +32,12 @@ export function ModalAsset(assets: modalProps) {
           />
           <Col style={{ overflowY: "auto", height: "30vh" }}>
             <Title level={3}>Responsáveis:</Title>
-            {assets.data.assignedUserIds.map((item) => (
-              <Link to={"/intern"}>
+            {assets.data.assignedUserIds.map((item, i) => (
+              <Link
+                to={`/intern/${assets.users[Number(item) - 1]?.unitId}/${
+                  assets.users[Number(item) - 1]?.unitId
+                }`}
+              >
                 <Col
                   style={{
                     backgroundColor: "#f1f1f1",

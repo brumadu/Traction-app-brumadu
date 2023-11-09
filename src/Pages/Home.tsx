@@ -2,10 +2,10 @@ import { Col, Typography, Row, Card } from "antd";
 import { fetchWorkorders, workorders } from "../Services/Axios/fetchWorkorders";
 import { useEffect, useState } from "react";
 import { assets, fetchAssets } from "../Services/Axios/fetchAssets";
-import { CardWorkorder } from "../Components/CardWorkorder/CardWorkorder";
 import { CardAssetHome } from "../Components/CardAssetHome/ChartAssetHealth";
 import { users, fetchUsers } from "../Services/Axios/fetchUsers";
 import { Link } from "react-router-dom";
+import { CardWorkorderHome } from "../Components/CardWorkorderHome/CardWorkorderHome";
 
 const { Title } = Typography;
 
@@ -83,7 +83,7 @@ export function Home() {
             {workordersData.map((item, index) =>
               item.status === "in progress" ? (
                 <Link to="/workorder">
-                  <CardWorkorder
+                  <CardWorkorderHome
                     assets={assetsData}
                     workordersData={workordersData[index]}
                     users={users}

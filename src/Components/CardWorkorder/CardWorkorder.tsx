@@ -3,6 +3,7 @@ import { Typography } from "antd";
 import { workorders } from "../../Services/Axios/fetchWorkorders";
 import { assets } from "../../Services/Axios/fetchAssets";
 import { users } from "../../Services/Axios/fetchUsers";
+import { Link } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
@@ -14,7 +15,7 @@ interface workordersData {
 
 export function CardWorkorder(data: workordersData) {
   return (
-    <Card hoverable={true} style={{ marginBottom: 10 }}>
+    <Card style={{ marginBottom: 10 }}>
       <Col>
         <Row justify={"space-between"}>
           <Title level={2} style={{ margin: 0 }}>
@@ -35,16 +36,13 @@ export function CardWorkorder(data: workordersData) {
           </Title>
         </Row>
         <Title level={5}>{data.workordersData.description}</Title>
-
-        <Card>
-          <Row justify={"space-between"}>
-            <Title level={4} style={{ margin: 0 }}>
-              {"Asset: " +
-                data.assets[Number(data.workordersData.assetId) - 1]?.name}
-            </Title>
-          </Row>
+        <Row justify={"space-between"}>
+          <Title level={4} style={{ margin: 0 }}>
+            {"Asset: " +
+              data.assets[Number(data.workordersData.assetId) - 1]?.name}
+          </Title>
           <Title
-            level={2}
+            level={4}
             type={
               data.workordersData.status === "in progress"
                 ? "warning"
@@ -54,43 +52,48 @@ export function CardWorkorder(data: workordersData) {
           >
             {data.workordersData.status}
           </Title>
-          <Divider></Divider>
-          <Card>
-            <Title level={3} style={{ marginTop: 5, margin: 0 }}>
-              Tarefas:
-            </Title>
-            {data.workordersData.checklist.map((item) =>
-              item.completed ? (
-                <Col>
-                  <Checkbox defaultChecked disabled>
-                    <Text>{item.task}</Text>
-                  </Checkbox>
-                </Col>
-              ) : (
-                <Col>
-                  <Checkbox disabled>
-                    <Text>{item.task}</Text>
-                  </Checkbox>
-                </Col>
-              )
-            )}
-          </Card>
-          <Card>
-            <Title level={3} style={{ margin: 0 }}>
-              Usuários Responsáveis:
-            </Title>
-            {data.workordersData.assignedUserIds.map((item) =>
-              data.users[Number(item) - 1]?.name !== undefined ? (
-                <Col>
+        </Row>
+        <Divider></Divider>
+        <Card>
+          <Title level={3} style={{ marginTop: 5, margin: 0 }}>
+            Tarefas:
+          </Title>
+          {data.workordersData.checklist.map((item) =>
+            item.completed ? (
+              <Col>
+                <Checkbox defaultChecked disabled>
+                  <Text>{item.task}</Text>
+                </Checkbox>
+              </Col>
+            ) : (
+              <Col>
+                <Checkbox>
+                  <Text>{item.task}</Text>
+                </Checkbox>
+              </Col>
+            )
+          )}
+          <Divider />
+          <Title level={3} style={{ margin: 0 }}>
+            Usuários Responsáveis:
+          </Title>
+          {data.workordersData.assignedUserIds.map((item) =>
+            data.users[Number(item) - 1]?.name !== undefined ? (
+              <Link
+                to={`/intern/${data.users[Number(item) - 1]?.companyId}/${
+                  data.users[Number(item) - 1]?.unitId
+                }`}
+              >
+                <Card hoverable={true} style={{ marginBottom: 10 }}>
                   <Text>
                     {data.users[Number(item) - 1]?.name +
                       " - " +
                       data.users[Number(item) - 1]?.email}
                   </Text>
-                </Col>
-              ) : null
-            )}
-          </Card>
+                </Card>
+              </Link>
+            ) : null
+          )}
         </Card>
       </Col>
     </Card>

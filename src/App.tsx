@@ -25,10 +25,12 @@ export default function App() {
             <Content>
               <Routes>
                 <Route path="/" index element={<Home />} />
-                <Route path="/assets" element={<Assets />} />
-                <Route path="/assets/:id" element={<Assets />} />
+                <Route path="/assets/:id?" element={<Assets />} />
                 <Route path="/workorder" element={<Workorder />} />
-                <Route path="/intern" element={<Intern />} />
+                <Route
+                  path="/intern/:companyId?/:unitId?"
+                  element={<Intern />}
+                />
               </Routes>
             </Content>
           </Card>
